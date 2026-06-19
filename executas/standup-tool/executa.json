@@ -1,5 +1,5 @@
 {
-  "tool_id": "standup-tool",
+  "tool_id": "tool-cubiczan-standup-tool-trj7594f",
   "type": "python",
   "command": ["python3", "standup_tool.py"],
   "enabled": true
