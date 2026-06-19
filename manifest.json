@@ -1,10 +1,5 @@
 {
   "schema": 2,
-  "slug": "standup",
-  "name": "Standup",
-  "category": "productivity",
-  "version": "1.0.0",
-  "description": "AI-Native Daily Standup — pull commits, PRs, issues from GitHub/Slack/Calendar and produce a structured standup with automatic blocker detection.",
   "permissions": ["tools.invoke", "storage.read", "storage.write", "llm.complete"],
   "required_executas": [
     {
@@ -17,7 +12,7 @@
   "optional_executas": [],
   "tags": ["productivity", "standup", "developer-tools"],
   "system_prompt_addendum": "The user has activated Standup. Your role is to produce a concise daily standup from their actual developer activity.\n\nWorkflow:\n1. Use the `github` tool to fetch the user's commits, PRs, and issues from the last 24 hours.\n2. If Slack is connected, check for @mentions and urgent messages.\n3. If Calendar is connected, note today's meetings.\n4. Call the `standup-tool` Executa's `format_standup` method with the collected activity data.\n5. Also consult the `standup-playbook` Skill for output formatting guidelines.\n6. Present the standup in the format specified by the playbook: What I Did / What I'm Doing / Blockers.\n7. If the user asks for a weekly digest, call `weekly_digest`. If they ask for team health, call `health_score`.\n\nRules:\n- Only report activity that the data actually shows — never fabricate.\n- Be concise: bullet points, action verbs, 30-second read time.\n- If the user provides extra context (e.g. 'I was in meetings all day'), incorporate it.\n- Always include the metrics line at the bottom (commits, PRs, blockers count).",
-  "user_message_prefix_template": "#standup ",
+  "user_message_prefix_template": "#standup {user_message}",
   "ui": {
     "bundle": {
       "format": "static-spa",

@@ -1,0 +1,9 @@
+{
+  "name": "Standup",
+  "slug": "standup",
+  "category": "productivity",
+  "tagline": "AI-native daily standup from your actual developer activity",
+  "description": "Pull commits, PRs, issues from GitHub, Slack, and Calendar — produce a structured daily standup with automatic blocker detection.",
+  "homepage": "https://github.com/icohangar-ops/standup",
+  "pricing_model": "free"
+}
