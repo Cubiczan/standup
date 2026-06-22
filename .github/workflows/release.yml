@@ -1,0 +1,59 @@
+name: Release standup-tool binaries
+
+# Build the standup-tool Executa as standalone binaries for every supported
+# platform and attach them to the GitHub Release for the pushed tag.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to build and upload assets for"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: ${{ matrix.platform }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-14        # Apple Silicon
+            platform: darwin-arm64
+          - runner: macos-13        # Intel
+            platform: darwin-x86_64
+          - runner: ubuntu-latest
+            platform: linux-x86_64
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pip pyinstaller
+
+      - name: Build binary
+        run: >
+          pyinstaller --onefile
+          --name tool-cubiczan-standup-tool-trj7594f
+          --distpath dist --workpath build
+          executas/standup-tool/standup_tool.py
+
+      - name: Package tar.gz (bin/ + manifest.json)
+        run: bash scripts/package.sh ${{ matrix.platform }}
+
+      - name: Upload asset to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.inputs.tag || github.ref_name }}
+        run: >
+          gh release upload "$TAG"
+          "dist/tool-cubiczan-standup-tool-trj7594f-${{ matrix.platform }}.tar.gz"
+          --clobber
