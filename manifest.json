@@ -6,7 +6,7 @@
       "tool_id": "tool-cubiczan-standup-tool-trj7594f"
     },
     {
-      "tool_id": "tool-cubiczan-standup-playbook-ng7tcat9"
+      "tool_id": "skill-cubiczan-standup-playbook-66ndskjt"
     }
   ],
   "optional_executas": [],
@@ -33,7 +33,7 @@
       }
     ],
     "host_api": {
-      "tools": ["tool-cubiczan-standup-tool-trj7594f", "tool-cubiczan-standup-playbook-ng7tcat9"],
+      "tools": ["tool-cubiczan-standup-tool-trj7594f", "skill-cubiczan-standup-playbook-66ndskjt"],
       "storage": ["get", "set", "list", "delete"],
       "chat": ["write_message", "append_artifact"],
       "window": ["open_view", "close", "focus", "set_title", "resize"],
